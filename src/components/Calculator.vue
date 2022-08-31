@@ -9,13 +9,17 @@
     <div class="calculator__keyboard">
       <div class="keyboard__grid">
         <button
+          class="key"
           v-for="btnKey of cal_keyboard"
           :key="btnKey.id"
           :value="btnKey.value"
+          :class="{ del: btnKey.class === 'del' }"
           @click="evalueteKeyPress(btnKey)"
         >
           {{ btnKey.text }}
         </button>
+        <button class="key del reset">reset</button>
+        <button class="key equal">=</button>
       </div>
     </div>
   </div>
@@ -44,8 +48,6 @@ export default {
         { id: "0", text: "0", value: "0", class: "number" },
         { id: "divide", text: "/", value: "/", class: "symbol" },
         { id: "multiplication", text: "x", value: "x", class: "symbol" },
-        { id: "reset", text: "reset", value: "reset", class: "reset" },
-        { id: "equal", text: "=", value: "=", class: "equal" },
       ],
     };
   },
@@ -58,7 +60,7 @@ export default {
         this.prompt = this.prompt.substring(0, last_chart - 1);
       }
 
-      if(keyboard.value === "x"){
+      if (keyboard.value === "x") {
         keyboard.value = "*";
       }
 
@@ -85,36 +87,80 @@ export default {
         this.prompt += keyboard.value;
         this.previus_press = keyboard.class;
       }
-
-      if(keyboard.class === "equal"){
-        const result = Function("return " + this.prompt)();
-        this.prompt = result;
-      }
     },
   },
 };
 </script>
 <style scoped>
-  .container.calculator{
-    width: 80%;
-    max-width: 750px;
-    margin: 0 auto;
-  }
-  .prompt{
-    background: var(--bg-promt-default-color);
-    height: 6rem;
-    border-radius: .7rem;
-    text-align: right;
-    color: var(--color-default-text-alternative);
-    padding: 1rem 1.5rem;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    align-content: center;
-  }
-  .prompt .prompt__text{
-    font-size: 3em;
-    font-weight: bold;
-  }
+.container.calculator {
+  width: 80%;
+  max-width: 550px;
+  margin: 0 auto;
+}
+.prompt {
+  background: var(--bg-promt-default-color);
+  height: 6rem;
+  border-radius: 0.7rem;
+  text-align: right;
+  color: var(--color-default-text-alternative);
+  padding: 1rem 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  align-content: center;
+  margin-bottom: 1rem;
+}
+.prompt .prompt__text {
+  font-size: 3em;
+  font-weight: bold;
+}
+.calculator__keyboard {
+  background: #242d44;
+  padding: 1rem 1.5rem;
+  border-radius: 0.7rem;
+}
+.calculator__keyboard .keyboard__grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(4, 1fr);
+}
+.keyboard__grid .key {
+  border: 0;
+  height: 3rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #434a59;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+  text-align: center;
+  box-shadow: #b3a497 0px 6px 0px;
+}
+.keyboard__grid .key:hover {
+  background: #ffffff;
+  box-shadow: #B3A497 0px 6px 0px;
+}
+.keyboard__grid .key.del {
+  background: #647198;
+  color: #fff;
+  font-size: 1.3rem;
+  box-shadow: #414e73 0px 6px 0px;
+}
+.keyboard__grid .key.del:hover {
+  background: #A2B2E1;
+  box-shadow: #414E73 0px 6px 0px;
+}
+.keyboard__grid .key.reset {
+  grid-column-end: span 2;
+}
+.keyboard__grid .key.equal {
+  grid-column-end: span 2;
+  background: #d03f2f;
+  color: #fff;
+  font-size: 1.5rem;
+  box-shadow: #93261a 0px 6px 0px;
+}
+.keyboard__grid .key.equal:hover{
+  background: #F96B5B;
+}
 </style>
