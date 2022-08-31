@@ -57,6 +57,10 @@ export default {
         this.prompt = "";
       } else if (keyboard.class === "del") {
         const last_chart = this.prompt.length;
+        if (last_chart === 0) {
+          this.prompt = "";
+          return;
+        }
         this.prompt = this.prompt.substring(0, last_chart - 1);
       }
 
