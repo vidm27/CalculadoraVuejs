@@ -3,8 +3,8 @@
     <div class="theme">
       <span>Calc</span>
     </div>
-    <div class="promt">
-      <span class="promt__text">{{ prompt }}</span>
+    <div class="prompt">
+      <span class="prompt__text">{{ prompt }}</span>
     </div>
     <div class="calculator__keyboard">
       <div class="keyboard__grid">
@@ -95,4 +95,26 @@ export default {
 };
 </script>
 <style scoped>
+  .container.calculator{
+    width: 80%;
+    max-width: 750px;
+    margin: 0 auto;
+  }
+  .prompt{
+    background: var(--bg-promt-default-color);
+    height: 6rem;
+    border-radius: .7rem;
+    text-align: right;
+    color: var(--color-default-text-alternative);
+    padding: 1rem 1.5rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    align-content: center;
+  }
+  .prompt .prompt__text{
+    font-size: 3em;
+    font-weight: bold;
+  }
 </style>
